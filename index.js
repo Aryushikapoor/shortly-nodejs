@@ -1,3 +1,5 @@
+import http from 'http';
+
 const express = require('express');
 const mongoose = require('mongoose');
 const csrf = require('csurf');
@@ -6,6 +8,7 @@ const expressSession = require('express-session');
 var MemoryStore = require('memorystore')(expressSession)
 const passport = require('passport');
 const flash = require('connect-flash');
+
 
 const app = express();
 
@@ -44,7 +47,16 @@ app.use(function (req, res, next) {
 });
 
 app.use(require('./controller/routes.js'));
+ 
 
-const PORT = process.env.PORT || 8000;
+// const PORT = process.env.PORT || 8000;
+const server = http.createServer((req, res) => {
+    // Set the response header
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    // Write some text to the response
+    res.end('Welcome to my simple Node.js app!');
+});
+const PORT = process.env.PORT || 3000;
+
 
 app.listen(PORT, () => console.log("Server Started At " + PORT));
