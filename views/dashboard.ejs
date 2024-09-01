@@ -109,7 +109,7 @@
                         <% } %>
                           <% } %>
 
-                            <form action="/create" , method="POST">
+                            <form action="/create"  method="POST">
                               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                               <div class="mb-3">
                                 <label for="url">Enter Long Url</label>
@@ -140,7 +140,7 @@
     <h2 class="text-center">Your Urls and Performance</h2>
     <div class="row row-cols-1 g-4 text-center">
 
-      <% if(typeof urls !='undefined' ){ %>
+      <!-- <% if(typeof urls !='undefined' ){ %> -->
         <% if(urls.length !=0){ %>
 
           <% urls.forEach((url)=> { %>
@@ -214,7 +214,7 @@
               <% }else{ %>
                 <h2>No Urls created By You 😔😔</h2>
                 <% } %>
-                  <% } %>
+                  <!-- <% } %> -->
 
     </div>
   </div>
@@ -232,36 +232,33 @@
       crossorigin="anonymous"></script>
 
 
-    <script>
-      <% if (typeof urls != 'undefined') { %>
-      <% if (urls.length != 0) { %>
-
-    <% urls.forEach((url) => { %>
-          var ct = document.getElementById('<%= url["_id"] %>').getContext('2d');
-
-      var myChart = new Chart(ct, {
-        type: 'doughnut',
-        data: {
-          labels: ['Total', 'Facebook', 'Instagram', 'Youtube'],
-          datasets: [{
-            label: 'Visits Distribution',
-            data: [<%= url['visits'] %>, <%= url['visitsFB'] %> , <%= url['visitsIG'] %> , <%= url['visitsYT'] %>],
-            backgroundColor: [
-              'rgba(66, 103, 178, 1)',
-              '#833AB4',
-              '#FF0000',
-              '#405DE6'
-            ],
-          }]
-        }
-      });
-
-  <%  }) %>
-  <%  } %>
-  <%  } %>
-
-    </script>
-
+      <script>
+        <% if (typeof urls != 'undefined') { %>
+          <% if (urls.length != 0) { %>
+            <% urls.forEach((url) => { %>
+              var ctx = document.getElementById('<%= url["_id"] %>').getContext('2d');
+              var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                  labels: ['Total', 'Facebook', 'Instagram', 'Youtube'],
+                  datasets: [{
+                    label: 'Visits Distribution',
+                    data: [<%= url['visits'] %>, <%= url['visitsFB'] %>, <%= url['visitsIG'] %>, <%= url['visitsYT'] %>],
+                    backgroundColor: [
+                      'rgba(66, 103, 178, 1)',
+                      '#833AB4',
+                      '#FF0000',
+                      '#405DE6'
+                    ],
+                  }]
+                }
+                
+              });
+            <% }) %>
+          <% } %>
+        <% } %>
+      </script>
+      
 </body>
 
 </html>

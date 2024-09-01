@@ -1,1 +1,1 @@
-module.exports = "<YOUR MONGO URI>";
+module.exports = "mongodb+srv://Aryushi:Aryushi718@cluster0.gfbvyqz.mongodb.net/shortly?retryWrites=true&w=majority&appName=Cluster0";
